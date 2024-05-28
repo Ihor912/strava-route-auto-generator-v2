@@ -1,11 +1,13 @@
 "use client";
 
 import { ActivityResponse } from "@/types/Strava";
-import { useEffect } from "react";
-import { useActivitiesContext } from "../context/activities-context";
+import { useEffect, useState } from "react";
 import { fetchActivities } from "../api/api";
 import { useQuery } from "@tanstack/react-query";
 import { useAuthTokenManager } from "./useAuthTokenManager";
+import { useDispatch, useSelector } from "react-redux";
+import { setActivities } from "../store/slices/activitiesSlice";
+import { RootState } from "../store";
 
 export const useActivitiesQuery = (authToken: string | undefined) =>
   useQuery({
@@ -17,20 +19,22 @@ export const useActivitiesQuery = (authToken: string | undefined) =>
 
 export function useActivitiesFetching() {
   const { getToken } = useAuthTokenManager();
+  // fetch activities data from api
   const {
-    data: newActivities,
+    data: activities,
     error: activitiesError,
     isLoading: activitiesLoading,
   } = useActivitiesQuery(getToken());
-  // store activities in context reducer
-  const { activities, dispatch } = useActivitiesContext();
+  const dispatch = useDispatch();
+  // instance of activities data in the store
+  const storedActivities = useSelector(
+    (state: RootState) => state.activities.activities
+  );
 
   useEffect(() => {
-    dispatch({
-      type: "SET_ACTIVITIES",
-      payload: (newActivities as ActivityResponse[]) || [],
-    });
-  }, [dispatch, newActivities]);
+    // on api fetch result, set activities data to the store
+    dispatch(setActivities((activities as ActivityResponse[]) || []));
+  }, [dispatch, activities]);
 
-  return { activities, activitiesLoading, activitiesError };
+  return { activities: storedActivities, activitiesLoading, activitiesError };
 }

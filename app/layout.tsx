@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { NavLinks } from "./ui/nav-links";
-import { ActivitiesProvider } from "./context/activities-context";
-import { SavedRoutesProvider } from "./context/saved-routes-context";
 import { QueryProvider } from "./query-provider";
+import { ReduxProvider } from "./redux-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,14 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ActivitiesProvider>
-          <SavedRoutesProvider>
-            <QueryProvider>
-              <NavLinks />
-              <main>{children}</main>
-            </QueryProvider>
-          </SavedRoutesProvider>
-        </ActivitiesProvider>
+        <ReduxProvider>
+          <QueryProvider>
+            <NavLinks />
+            <main>{children}</main>
+          </QueryProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

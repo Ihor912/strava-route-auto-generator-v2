@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <>
       <h1>Hello, Routes page!</h1>
-      {routes.map((x) => x.name)}
+      {routes?.map((x) => x.name)}
     </>
   );
 }

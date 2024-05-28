@@ -32,7 +32,7 @@ export default function Map({
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {activities.map((activity: Activity) => (
+      {activities?.map((activity: Activity) => (
         <Polyline key={activity.id} positions={activity.positions}>
           <Popup>
             <Link className="link" href={`/activities/${activity.id}`}>
@@ -41,7 +41,7 @@ export default function Map({
           </Popup>
         </Polyline>
       ))}
-      {routes.map((route: Activity) => (
+      {routes?.map((route: Activity) => (
         <Polyline key={route.id} positions={route.positions} color="red">
           <Popup>
             <Link className="link" href={`/saved-routes/${route.id}`}>

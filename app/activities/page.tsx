@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       <h1>Hello, Activities page!</h1>
-      {activities.map((x: Activity) => x.name)}
+      {activities?.map((x: Activity) => x.name)}
     </>
   );
 }
