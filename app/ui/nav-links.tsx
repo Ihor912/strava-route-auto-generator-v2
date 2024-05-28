@@ -5,21 +5,29 @@ import Link from "next/link";
 
 export function NavLinks() {
   const pathname = usePathname();
-
   return (
-    <nav>
-      <Link className={`link ${pathname === "/" ? "active" : ""}`} href="/">
+    <nav className="bg-gray-800 p-4 flex flex-col sm:flex-row justify-around">
+      <Link
+        className={`link text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium text-center ${
+          pathname === "/" ? "bg-gray-600" : ""
+        }`}
+        href="/"
+      >
         Heatmap
       </Link>
 
       <Link
-        className={`link ${pathname === "/activities" ? "active" : ""}`}
+        className={`link text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium text-center ${
+          pathname === "/activities" ? "bg-gray-600" : ""
+        }`}
         href="/activities"
       >
         Activities
       </Link>
       <Link
-        className={`link ${pathname === "/saved-routes" ? "active" : ""}`}
+        className={`link text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium text-center ${
+          pathname === "/saved-routes" ? "bg-gray-600" : ""
+        }`}
         href="/saved-routes"
       >
         Saved Routes
