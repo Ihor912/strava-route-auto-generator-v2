@@ -8,7 +8,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 // END: Preserve spaces to avoid auto-sorting
 import { MapContainer, Polyline, Popup, TileLayer } from "react-leaflet";
-import { Activity, Route } from "@/types/Strava";
+import { Activity } from "@/types/Strava";
 import Link from "next/link";
 
 export default function Map({
@@ -17,7 +17,7 @@ export default function Map({
   location,
 }: {
   activities: Activity[];
-  routes: Route[];
+  routes: Activity[];
   location: [number, number];
 }) {
   return (

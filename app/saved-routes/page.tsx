@@ -1,13 +1,19 @@
 "use client";
 
+import { Activity } from "@/types/Strava";
 import { useSavedRoutesFetching } from "../hooks/useSavedRoutesFetching";
 
 export default function Page() {
-  const { routes, loading, error } = useSavedRoutesFetching();
+  const { routes, currentUserLoading, routesLoading } =
+    useSavedRoutesFetching();
+
   return (
     <>
-      <h1>Hello, Routes page!</h1>
-      {routes?.map((x) => x.name)}
+      {routes?.map((x: Activity) => (
+        <li key={x.id} className="mb-4 p-4 bg-white rounded-lg shadow-md">
+          <h3 className="text-lg font-semibold">{x.name}</h3>
+        </li>
+      ))}
     </>
   );
 }

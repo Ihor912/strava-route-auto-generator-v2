@@ -56,5 +56,5 @@ export function useSavedRoutesFetching() {
     dispatch(setSavedRoutes((routes as ActivityResponse[]) || []));
   }, [dispatch, routes]);
 
-  return { routes: storedRoutes, routesLoading };
+  return { routes: storedRoutes, currentUserLoading, routesLoading };
 }
