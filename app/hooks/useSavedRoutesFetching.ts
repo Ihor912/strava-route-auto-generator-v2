@@ -6,6 +6,7 @@ import { RootState } from "../store";
 import { useEffect } from "react";
 import { setSavedRoutes } from "../store/slices/savedRoutesSlice";
 import { ActivityResponse } from "@/types/Strava";
+import { showErrorToast } from "../ui/utils/toast";
 
 export const useCurrentAthleteQuery = (authToken: string | undefined) =>
   useQuery({
@@ -43,9 +44,17 @@ export function useSavedRoutesFetching() {
   const storedRoutes = useSelector((state: RootState) => state.routes.routes);
 
   useEffect(() => {
+    if (routesError || currentUserError) {
+      showErrorToast(
+        (routesError || currentUserError)?.message ||
+          "An error occurred while fetching saved routes"
+      );
+      return;
+    }
+
     // on api fetch result, set activities data to the store
     dispatch(setSavedRoutes((routes as ActivityResponse[]) || []));
   }, [dispatch, routes]);
 
-  return { routes: storedRoutes, routesLoading, routesError };
+  return { routes: storedRoutes, routesLoading };
 }

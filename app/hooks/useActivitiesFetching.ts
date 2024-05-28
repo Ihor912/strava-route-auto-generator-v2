@@ -8,6 +8,7 @@ import { useAuthTokenManager } from "./useAuthTokenManager";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivities } from "../store/slices/activitiesSlice";
 import { RootState } from "../store";
+import { showErrorToast } from "../ui/utils/toast";
 
 export const useActivitiesQuery = (authToken: string | undefined) =>
   useQuery({
@@ -32,9 +33,16 @@ export function useActivitiesFetching() {
   );
 
   useEffect(() => {
+    if (activitiesError) {
+      showErrorToast(
+        activitiesError.message || "An error occurred while fetching activities"
+      );
+      return;
+    }
+
     // on api fetch result, set activities data to the store
     dispatch(setActivities((activities as ActivityResponse[]) || []));
-  }, [dispatch, activities]);
+  }, [dispatch, activities, activitiesError]);
 
-  return { activities: storedActivities, activitiesLoading, activitiesError };
+  return { activities: storedActivities, activitiesLoading };
 }

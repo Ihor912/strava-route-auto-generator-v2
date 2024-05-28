@@ -4,6 +4,8 @@ import "./globals.css";
 import { NavLinks } from "./ui/nav-links";
 import { QueryProvider } from "./query-provider";
 import { ReduxProvider } from "./redux-provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +26,7 @@ export default function RootLayout({
           <QueryProvider>
             <NavLinks />
             <main>{children}</main>
+            <ToastContainer />
           </QueryProvider>
         </ReduxProvider>
       </body>
