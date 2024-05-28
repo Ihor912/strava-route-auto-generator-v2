@@ -4,7 +4,7 @@ import { AuthResponseData } from "@/types/Strava";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { authenticate } from "../api/api";
-import { showErrorToast } from "../ui/utils/toast";
+import { showErrorToast } from "../ui/toast";
 
 const AUTH_TOKEN_KEY = "auth_token";
 const EXPIRES_IN_KEY = "token_expires_in";

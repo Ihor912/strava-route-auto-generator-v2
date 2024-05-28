@@ -6,7 +6,7 @@ import { RootState } from "../store";
 import { useEffect } from "react";
 import { setSavedRoutes } from "../store/slices/savedRoutesSlice";
 import { ActivityResponse } from "@/types/Strava";
-import { showErrorToast } from "../ui/utils/toast";
+import { showErrorToast } from "../ui/toast";
 
 export const useCurrentAthleteQuery = (authToken: string | undefined) =>
   useQuery({

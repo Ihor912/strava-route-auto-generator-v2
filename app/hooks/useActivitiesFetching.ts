@@ -8,7 +8,7 @@ import { useAuthTokenManager } from "./useAuthTokenManager";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivities } from "../store/slices/activitiesSlice";
 import { RootState } from "../store";
-import { showErrorToast } from "../ui/utils/toast";
+import { showErrorToast } from "../ui/toast";
 
 export const useActivitiesQuery = (authToken: string | undefined) =>
   useQuery({
