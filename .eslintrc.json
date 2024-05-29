@@ -8,8 +8,9 @@
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/no-unused-vars": "off",
-    "unused-imports/no-unused-imports-ts": "error",
-    "unused-imports/no-unused-vars-ts": [
+    "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
       "warn",
       {
         "vars": "all",
