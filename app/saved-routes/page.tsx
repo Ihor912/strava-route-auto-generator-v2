@@ -4,8 +4,7 @@ import { Activity } from "@/types/Strava";
 import { useSavedRoutesFetching } from "../hooks/useSavedRoutesFetching";
 
 export default function Page() {
-  const { routes, currentUserLoading, routesLoading } =
-    useSavedRoutesFetching();
+  const { routes } = useSavedRoutesFetching();
 
   return (
     <>

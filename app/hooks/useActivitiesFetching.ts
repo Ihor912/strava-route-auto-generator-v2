@@ -1,14 +1,14 @@
 "use client";
 
 import { ActivityResponse } from "@/types/Strava";
-import { useEffect, useState } from "react";
-import { fetchActivities } from "../api/api";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthTokenManager } from "./useAuthTokenManager";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActivities } from "../store/slices/activitiesSlice";
+import { fetchActivities } from "../api/api";
 import { RootState } from "../store";
+import { setActivities } from "../store/slices/activitiesSlice";
 import { showErrorToast } from "../ui/toast";
+import { useAuthTokenManager } from "./useAuthTokenManager";
 
 export const useActivitiesQuery = (authToken: string | undefined) =>
   useQuery({
@@ -29,13 +29,14 @@ export function useActivitiesFetching() {
   const dispatch = useDispatch();
   // instance of activities data in the store
   const storedActivities = useSelector(
-    (state: RootState) => state.activities.activities
+    (state: RootState) => state.activities.activities,
   );
 
   useEffect(() => {
     if (activitiesError) {
       showErrorToast(
-        activitiesError.message || "An error occurred while fetching activities"
+        activitiesError.message ||
+          "An error occurred while fetching activities",
       );
       return;
     }

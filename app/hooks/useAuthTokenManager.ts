@@ -19,16 +19,12 @@ export const useStravaAuthQuery = (tokenExpired: boolean) =>
 
 export function useAuthTokenManager() {
   const [isTokenExpired, setIsTokenExpired] = useState<boolean>(false);
-  const {
-    data: auth,
-    error: authError,
-    isLoading: authLoading,
-  } = useStravaAuthQuery(isTokenExpired);
+  const { data: auth, error: authError } = useStravaAuthQuery(isTokenExpired);
 
   useEffect(() => {
     if (authError) {
       showErrorToast(
-        authError.message || "An error occurred while authenticating"
+        authError.message || "An error occurred while authenticating",
       );
       return;
     }
@@ -52,7 +48,7 @@ export function useAuthTokenManager() {
     if (auth && getToken() !== auth.access_token) {
       setToken(auth.access_token, auth.expires_in);
     }
-  }, [auth]);
+  }, [auth, authError]);
 
   const localStorageAvailable = () => {
     return typeof window !== "undefined";

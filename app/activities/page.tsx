@@ -4,7 +4,7 @@ import { Activity } from "@/types/Strava";
 import { useActivitiesFetching } from "../hooks/useActivitiesFetching";
 
 export default function Page() {
-  const { activities, activitiesLoading } = useActivitiesFetching();
+  const { activities } = useActivitiesFetching();
 
   return (
     <>

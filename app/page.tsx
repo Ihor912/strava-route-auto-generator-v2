@@ -16,7 +16,7 @@ export default function Home() {
   const { routes, routesLoading, currentUserLoading } =
     useSavedRoutesFetching();
   const [currentLocation, setCurrentLocation] = useState<[number, number] | []>(
-    []
+    [],
   );
 
   useEffect(() => {

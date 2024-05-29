@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchSavedRoutes, getCurrentAthlete } from "../api/api";
-import { useAuthTokenManager } from "./useAuthTokenManager";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
-import { useEffect } from "react";
-import { setSavedRoutes } from "../store/slices/savedRoutesSlice";
 import { ActivityResponse } from "@/types/Strava";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSavedRoutes, getCurrentAthlete } from "../api/api";
+import { RootState } from "../store";
+import { setSavedRoutes } from "../store/slices/savedRoutesSlice";
 import { showErrorToast } from "../ui/toast";
+import { useAuthTokenManager } from "./useAuthTokenManager";
 
 export const useCurrentAthleteQuery = (authToken: string | undefined) =>
   useQuery({
@@ -47,14 +47,14 @@ export function useSavedRoutesFetching() {
     if (routesError || currentUserError) {
       showErrorToast(
         (routesError || currentUserError)?.message ||
-          "An error occurred while fetching saved routes"
+          "An error occurred while fetching saved routes",
       );
       return;
     }
 
     // on api fetch result, set activities data to the store
     dispatch(setSavedRoutes((routes as ActivityResponse[]) || []));
-  }, [dispatch, routes]);
+  }, [dispatch, routes, currentUserError, routesError]);
 
   return { routes: storedRoutes, currentUserLoading, routesLoading };
 }
