@@ -11,12 +11,13 @@ import { LoadingSpinner } from "../ui/loading-spinner";
  * @return {JSX.Element}
  */
 export default function Page() {
-  const { routes, routesLoading } = useSavedRoutesFetching();
+  const { routes, routesLoading, currentUserLoading } =
+    useSavedRoutesFetching();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(routesLoading);
-  }, [routesLoading]);
+    setIsLoading(routesLoading || currentUserLoading);
+  }, [routesLoading, currentUserLoading]);
 
   if (isLoading) return <LoadingSpinner />;
 

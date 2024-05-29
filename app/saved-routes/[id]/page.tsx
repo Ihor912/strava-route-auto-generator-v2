@@ -11,13 +11,14 @@ import { useEffect, useState } from "react";
  * @return {JSX.Element}
  */
 export default function Page({ params }: { params: { id: number } }) {
-  const { routes, routesLoading } = useSavedRoutesFetching();
+  const { routes, routesLoading, currentUserLoading } =
+    useSavedRoutesFetching();
   const route = routes.find((x) => x.id === Number(params.id));
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(routesLoading);
-  }, [routesLoading]);
+    setIsLoading(routesLoading || currentUserLoading);
+  }, [routesLoading, currentUserLoading]);
 
   if (isLoading) return <LoadingSpinner />;
 
