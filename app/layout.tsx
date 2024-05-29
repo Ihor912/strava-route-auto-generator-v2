@@ -3,8 +3,7 @@ import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-import { QueryProvider } from "./query-provider";
-import { ReduxProvider } from "./redux-provider";
+import { ProvidersWrapper } from "./providers-wrapper";
 import { NavLinks } from "./ui/nav-links";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,13 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReduxProvider>
-          <QueryProvider>
-            <NavLinks />
-            <main>{children}</main>
-            <ToastContainer />
-          </QueryProvider>
-        </ReduxProvider>
+        <ProvidersWrapper>
+          <NavLinks />
+          <main>{children}</main>
+          <ToastContainer />
+        </ProvidersWrapper>
       </body>
     </html>
   );
