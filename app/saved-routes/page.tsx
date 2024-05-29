@@ -3,6 +3,11 @@
 import { Activity } from "@/types/Strava";
 import { useSavedRoutesFetching } from "../hooks/useSavedRoutesFetching";
 
+/**
+ * Renders a list of saved routes.
+ *
+ * @return {JSX.Element}
+ */
 export default function Page() {
   const { routes } = useSavedRoutesFetching();
 

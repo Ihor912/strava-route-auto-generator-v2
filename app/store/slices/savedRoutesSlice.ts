@@ -16,6 +16,13 @@ const savedRoutesSlice = createSlice({
   name: "routes",
   initialState,
   reducers: {
+    /**
+     * Updates the saved routes state with the provided activity responses.
+     *
+     * @param {SavedRoutesState} state - The current state of the saved routes.
+     * @param {PayloadAction<ActivityResponse[]>} action - The action containing the activity responses.
+     * @return {void}
+     */
     setSavedRoutes: (state, action: PayloadAction<ActivityResponse[]>) => {
       state.routes = action.payload?.map((route) => ({
         id: route.id,
@@ -23,6 +30,13 @@ const savedRoutesSlice = createSlice({
         positions: polyline.decode(route.map.summary_polyline),
       }));
     },
+    /**
+     * Adds a saved route to the state.
+     *
+     * @param {SavedRoutesState} state - The current state of the saved routes.
+     * @param {PayloadAction<Activity>} action - The action containing the activity to be added.
+     * @return {void}
+     */
     addSavedRoute: (state, action: PayloadAction<Activity>) => {
       state.routes.push(action.payload);
     },

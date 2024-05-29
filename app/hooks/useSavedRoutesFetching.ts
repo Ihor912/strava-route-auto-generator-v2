@@ -8,6 +8,12 @@ import { setSavedRoutes } from "../store/slices/savedRoutesSlice";
 import { showErrorToast } from "../ui/toast";
 import { useAuthTokenManager } from "./useAuthTokenManager";
 
+/**
+ * Fetches the current athlete's data using the provided authentication token.
+ *
+ * @param {string | undefined} authToken - The authentication token to use for the request.
+ * @return {QueryResult} The result of the query, containing the current athlete's data.
+ */
 export const useCurrentAthleteQuery = (authToken: string | undefined) =>
   useQuery({
     queryKey: ["currentAthlete"],
@@ -16,6 +22,13 @@ export const useCurrentAthleteQuery = (authToken: string | undefined) =>
     refetchOnWindowFocus: false,
   });
 
+/**
+ * Retrieves the saved routes for a given athlete using the provided athlete ID and authentication token.
+ *
+ * @param {number} athleteId - The ID of the athlete.
+ * @param {string} authToken - The authentication token.
+ * @return {QueryResult} The result of the query, containing the saved routes.
+ */
 export const useSavedRoutesQuery = (athleteId?: number, authToken?: string) =>
   useQuery({
     queryKey: ["savedRoutes"],
@@ -24,6 +37,11 @@ export const useSavedRoutesQuery = (athleteId?: number, authToken?: string) =>
     refetchOnWindowFocus: false,
   });
 
+/**
+ * A custom hook that fetches saved routes data from the API and stores it in the Redux store.
+ *
+ * @return {Object} An object containing the fetched routes data, a boolean indicating if the current user is loading, and a boolean indicating if the routes are loading.
+ */
 export function useSavedRoutesFetching() {
   // retrieve auth token from the token manager
   const { getToken } = useAuthTokenManager();

@@ -7,10 +7,18 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 
 import "leaflet-defaulticon-compatibility";
 // END: Preserve spaces to avoid auto-sorting
-import { MapContainer, Polyline, Popup, TileLayer } from "react-leaflet";
 import { Activity } from "@/types/Strava";
 import Link from "next/link";
+import { MapContainer, Polyline, Popup, TileLayer } from "react-leaflet";
 
+/**
+ * Renders a map component with activities and routes.
+ *
+ * @param {Activity[]} activities - The list of activities.
+ * @param {Activity[]} routes - The list of routes.
+ * @param {[number, number]} location - The center location of the map.
+ * @return {JSX.Element} component.
+ */
 export default function Map({
   activities,
   routes,

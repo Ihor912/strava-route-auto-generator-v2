@@ -10,6 +10,12 @@ import { setActivities } from "../store/slices/activitiesSlice";
 import { showErrorToast } from "../ui/toast";
 import { useAuthTokenManager } from "./useAuthTokenManager";
 
+/**
+ * Custom hook that fetches activities data from the API.
+ *
+ * @param {string | undefined} authToken - The authentication token to use for the request.
+ * @return {QueryResult<ActivityResponse[]>} The result of the query, containing the activities data.
+ */
 export const useActivitiesQuery = (authToken: string | undefined) =>
   useQuery({
     queryKey: ["activities"],
@@ -18,6 +24,11 @@ export const useActivitiesQuery = (authToken: string | undefined) =>
     refetchOnWindowFocus: false,
   });
 
+/**
+ * Custom hook that fetches activities data from the API and updates the Redux store.
+ *
+ * @return {Object} An object containing the fetched activities data and a boolean indicating if the activities are loading.
+ */
 export function useActivitiesFetching() {
   const { getToken } = useAuthTokenManager();
   // fetch activities data from api

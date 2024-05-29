@@ -1,5 +1,8 @@
-import React from "react";
-
+/**
+ * Renders a loading spinner component.
+ *
+ * @return {JSX.Element} component.
+ */
 export function LoadingSpinner() {
   return (
     <div className="flex justify-center items-center h-screen">

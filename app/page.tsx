@@ -11,6 +11,11 @@ const LazyMap = dynamic(() => import("@/app/ui/map"), {
   loading: () => <LoadingSpinner />,
 });
 
+/**
+ * Renders the Home component which displays a map of user's activities and saved routes.
+ *
+ * @return {JSX.Element} component.
+ */
 export default function Home() {
   const { activities, activitiesLoading } = useActivitiesFetching();
   const { routes, routesLoading, currentUserLoading } =

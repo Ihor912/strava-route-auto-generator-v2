@@ -1,8 +1,13 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
+/**
+ * Renders the navigation links bar component.
+ *
+ * @return {JSX.Element} component.
+ */
 export function NavLinks() {
   const pathname = usePathname();
   return (

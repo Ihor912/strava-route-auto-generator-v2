@@ -1,8 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
+/**
+ * A QueryProvider component that wraps the provided children with a QueryClient.
+ *
+ * @param {ReactNode} props.children - The children components to be wrapped by the QueryProvider.
+ * @return {JSX.Element} with the wrapped provided children.
+ */
 export const QueryProvider = ({ children }) => {
   const [client] = useState(new QueryClient());
 

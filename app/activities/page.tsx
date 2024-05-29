@@ -3,6 +3,11 @@
 import { Activity } from "@/types/Strava";
 import { useActivitiesFetching } from "../hooks/useActivitiesFetching";
 
+/**
+ * Renders a list of activities fetched from the server.
+ *
+ * @return {JSX.Element}
+ */
 export default function Page() {
   const { activities } = useActivitiesFetching();
 
