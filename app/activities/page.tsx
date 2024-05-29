@@ -1,7 +1,9 @@
 "use client";
 
 import { Activity } from "@/types/Strava";
+import { useEffect, useState } from "react";
 import { useActivitiesFetching } from "../hooks/useActivitiesFetching";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 /**
  * Renders a list of activities fetched from the server.
@@ -9,7 +11,14 @@ import { useActivitiesFetching } from "../hooks/useActivitiesFetching";
  * @return {JSX.Element}
  */
 export default function Page() {
-  const { activities } = useActivitiesFetching();
+  const { activities, activitiesLoading } = useActivitiesFetching();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(activitiesLoading);
+  }, [activitiesLoading]);
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>

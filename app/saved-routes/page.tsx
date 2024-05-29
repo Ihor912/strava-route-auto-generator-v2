@@ -1,7 +1,9 @@
 "use client";
 
 import { Activity } from "@/types/Strava";
+import { useEffect, useState } from "react";
 import { useSavedRoutesFetching } from "../hooks/useSavedRoutesFetching";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 /**
  * Renders a list of saved routes.
@@ -9,7 +11,14 @@ import { useSavedRoutesFetching } from "../hooks/useSavedRoutesFetching";
  * @return {JSX.Element}
  */
 export default function Page() {
-  const { routes } = useSavedRoutesFetching();
+  const { routes, routesLoading } = useSavedRoutesFetching();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(routesLoading);
+  }, [routesLoading]);
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
