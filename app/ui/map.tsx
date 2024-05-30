@@ -30,6 +30,7 @@ export default function Map({
 }) {
   return (
     <MapContainer
+      data-testid="map"
       preferCanvas={true}
       center={location}
       zoom={11}

@@ -11,7 +11,10 @@ import { usePathname } from "next/navigation";
 export function NavLinks() {
   const pathname = usePathname();
   return (
-    <nav className="bg-gray-800 p-4 flex flex-col sm:flex-row justify-around">
+    <nav
+      data-testid="nav-bar"
+      className="bg-gray-800 p-4 flex flex-col sm:flex-row justify-around"
+    >
       <Link
         className={`link text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium text-center ${
           pathname === "/" ? "bg-gray-600" : ""
