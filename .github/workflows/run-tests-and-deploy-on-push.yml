@@ -3,7 +3,12 @@ on:
   pull_request:
     types:
       - opened
+    branches:
+      - master
   workflow_dispatch:
+  push:
+    branches:
+      - master
 jobs:
   run-linters:
     runs-on: ubuntu-latest
