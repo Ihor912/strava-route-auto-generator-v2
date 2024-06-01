@@ -1,7 +1,23 @@
-name: Run tests and deploy on push
+name: Run tests, linters and deploy on push
 on: [push, workflow_dispatch]
 jobs:
+  run-linters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run linters and formatters
+        run: |
+          npm run lint
+          npm run lint-next
   run-tests:
+    needs: run-linters
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -13,7 +29,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Run tests
-        run: npm test
+        run: npm run test
   deploy:
     needs: run-tests
     runs-on: ubuntu-latest
