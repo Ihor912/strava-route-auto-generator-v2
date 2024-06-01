@@ -9,6 +9,12 @@ import store from "./store";
  * @param {ReactNode} children - The children components to be wrapped by the Redux Provider.
  * @return {JSX.Element} with the wrapped provided children.
  */
-export const ReduxProvider = ({ children }) => {
+type ReduxProviderProps = {
+  children: React.ReactNode;
+};
+
+export const ReduxProvider: React.FC<ReduxProviderProps> = ({
+  children,
+}: ReduxProviderProps): JSX.Element => {
   return <Provider store={store}>{children}</Provider>;
 };
