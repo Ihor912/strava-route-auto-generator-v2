@@ -12,7 +12,7 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Load & cache dependencies
-        uses: "./.github/actions/cached-deps/action"
+        uses: "./.github/actions/cached-deps/action.yml"
       - name: Run linters and formatters
         run: |
           npm run lint
