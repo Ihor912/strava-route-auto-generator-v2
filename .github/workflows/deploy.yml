@@ -7,6 +7,8 @@ env:
   STRAVA_API_BASE_URL: https://www.strava.com
 jobs:
   run-tests:
+    env:
+      STRAVA_API_BASE_URL_2: https://www.strava.com
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -56,6 +58,7 @@ jobs:
         run: ls
       - name: Output information
         run: |
-          echo "Using API(option #2): $STRAVA_API_BASE_URL"
+          echo "Using API: ${{ env.STRAVA_API_BASE_URL }}"
+          echo "Using API(option #2): $STRAVA_API_BASE_URL_2"
       - name: Deploy
         run: echo "Deploying..."
