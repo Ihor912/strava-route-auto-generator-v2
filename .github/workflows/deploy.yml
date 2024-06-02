@@ -7,8 +7,6 @@ env:
   STRAVA_API_BASE_URL: https://www.strava.com
 jobs:
   run-tests:
-    env:
-      STRAVA_API_BASE_URL_2: https://www.strava.com
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -48,6 +46,9 @@ jobs:
           path: ".next"
   deploy:
     needs: build
+    env:
+      STRAVA_API_BASE_URL_2: https://www.strava.com
+      DB_USER_NAME: ${{ secrets.DB_USER_NAME }}
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
