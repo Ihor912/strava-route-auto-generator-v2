@@ -56,7 +56,6 @@ jobs:
         run: ls
       - name: Output information
         run: |
-          echo "Using API: ${{ STRAVA_API_BASE_URL }}"
           echo "Using API(option #2): $STRAVA_API_BASE_URL"
       - name: Deploy
         run: echo "Deploying..."
