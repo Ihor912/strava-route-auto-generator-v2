@@ -22,3 +22,56 @@ jobs:
         run: |
           npm run lint
           npm run lint-next
+
+      - name: Run tests
+        id: run-tests
+        run: npm run test
+
+      - name: Upload test report
+        if: failure() && steps.run-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test.json
+
+  build:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+
+      - name: Load & cache dependencies
+        uses: ./.github/actions/cached-deps
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: .next
+
+  deploy:
+    needs: build
+    env:
+      STRAVA_API_BASE_URL_2: https://www.strava.com
+      DB_USER_NAME: ${{ secrets.DB_USER_NAME }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+
+      - name: Output contents
+        run: ls
+
+      - name: Output information
+        run: |
+          echo "Using API: ${{ env.STRAVA_API_BASE_URL }}"
+          echo "Using API(option #2): $STRAVA_API_BASE_URL_2"
+
+      - name: Deploy
+        run: echo "Deploying..."
