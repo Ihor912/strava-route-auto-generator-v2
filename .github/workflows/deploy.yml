@@ -18,7 +18,7 @@ jobs:
       - name: Load & cache dependencies
         uses: ./.github/actions/cached-deps
         with:
-          caching: "false"
+          caching: "true"
 
       - name: Run linters
         run: |
