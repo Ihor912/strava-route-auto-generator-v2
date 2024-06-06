@@ -84,5 +84,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           bucket: strava-route-generator-hosting
-          dist-folder: ./dist
+          dist-folder: ./.next
           # bucket-region: us-east-1
