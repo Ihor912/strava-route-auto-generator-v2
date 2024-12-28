@@ -1,5 +1,6 @@
 "use client";
 
+import { OpenRouteResponse } from "@/types/OpenRoute";
 import { ActivityResponse, Athlete, AuthResponseData } from "@/types/Strava";
 import axios from "axios";
 
@@ -60,4 +61,41 @@ const fetchSavedRoutes = async (
   return data;
 };
 
-export { authenticate, fetchActivities, fetchSavedRoutes, getCurrentAthlete };
+const autoGenerateNewRoute = async (): Promise<OpenRouteResponse> => {
+  const startLat = 50.9149184;
+  const startLon = 21.397504;
+
+  // Randomize route length between 30 km and 100 km
+  const randomLength = Math.floor(Math.random() * (100000 - 30000) + 30000); // in meters
+
+  const requestBody = {
+    coordinates: [[startLon, startLat]],
+    options: {
+      round_trip: {
+        length: randomLength,
+      },
+    },
+  };
+
+  const response = await axios.post(
+    "https://api.openrouteservice.org/v2/directions/cycling-regular",
+    requestBody,
+    {
+      headers: {
+        Authorization: process.env.NEXT_PUBLIC_OPEN_ROUTE_TOKEN,
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  return response?.data?.routes?.[0] || null;
+};
+
+export {
+  authenticate,
+  autoGenerateNewRoute,
+  fetchActivities,
+  fetchSavedRoutes,
+  getCurrentAthlete
+};
+

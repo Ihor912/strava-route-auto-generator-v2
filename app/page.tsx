@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewRouteAutoGeneration } from "@/app/hooks/useNewRouteAutoGeneration";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useActivitiesFetching } from "./hooks/useActivitiesFetching";
@@ -18,6 +19,7 @@ const LazyMap = dynamic(() => import("@/app/ui/map"), {
  */
 export default function Home() {
   const { activities, activitiesLoading } = useActivitiesFetching();
+  const { newRoute, newRouteLoading } = useNewRouteAutoGeneration();
   const { routes, routesLoading, currentUserLoading } =
     useSavedRoutesFetching();
   const [currentLocation, setCurrentLocation] = useState<[number, number] | []>(
@@ -26,12 +28,16 @@ export default function Home() {
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setCurrentLocation([
-          position.coords.latitude,
-          position.coords.longitude,
-        ]);
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCurrentLocation([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
+        },
+        null,
+        { enableHighAccuracy: true },
+      );
     }
   }, []);
 
@@ -40,12 +46,14 @@ export default function Home() {
       {currentLocation?.length !== 2 ||
       activitiesLoading ||
       currentUserLoading ||
-      routesLoading ? (
+      routesLoading ||
+      newRouteLoading ? (
         <LoadingSpinner />
       ) : (
         <LazyMap
           activities={activities}
           routes={routes}
+          newRoute={newRoute}
           location={currentLocation}
         />
       )}

@@ -22,10 +22,12 @@ import { MapContainer, Polyline, Popup, TileLayer } from "react-leaflet";
 export default function Map({
   activities,
   routes,
+  newRoute,
   location,
 }: {
   activities: Activity[];
   routes: Activity[];
+  newRoute: Activity | null;
   location: [number, number];
 }) {
   return (
@@ -59,6 +61,19 @@ export default function Map({
           </Popup>
         </Polyline>
       ))}
+      {newRoute && (
+        <Polyline
+          key={newRoute.id}
+          positions={newRoute.positions}
+          color="orange"
+        >
+          <Popup>
+            <Link className="link" href={`/saved-routes/${newRoute.id}`}>
+              <h2>{newRoute.name}</h2>
+            </Link>
+          </Popup>
+        </Polyline>
+      )}
     </MapContainer>
   );
 }
